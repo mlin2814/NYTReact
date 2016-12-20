@@ -17,14 +17,7 @@ var helpers = {
 
 		return axios.get(queryURL)
 			.then(function(response){
-				// var returnArr = [];
-				// var length = response.data.response.docs.length;
-				// console.log(length);
-				// for(var i = 0; i < length; i++){
-					return response.data.response.docs[0].headline.main;
-					// console.log(returnArr);
-				// }
-				// return returnArr;
+				return response.data.response.docs[0].headline.main;
 		})
 
 	},

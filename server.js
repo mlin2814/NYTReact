@@ -47,7 +47,7 @@ app.get('/', function(req, res){
 app.get('/api/', function(req, res) {
 
   // We will find all the records, sort it in descending order, then limit the records to 5
-  History.find({}).sort([['date', 'descending']]).limit(1)
+  History.find({}).sort([['date', 'descending']]).limit(5)
     .exec(function(err, doc){
 
       if(err){
@@ -66,7 +66,7 @@ app.post('/api/', function(req, res){
 
   // Here we'll save the location based on the JSON input. 
   // We'll use Date.now() to always get the current date time
-  History.create({"location": req.body.location, "date": Date.now()}, function(err){
+  History.create({"location": req.body.location, "date": Date.now(), "address": req.body.address}, function(err){
     if(err){
       console.log(err);
     }
