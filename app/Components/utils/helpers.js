@@ -13,18 +13,18 @@ var helpers = {
 		console.log(location);
 
 		//Figure out the geolocation
-		var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + nytAPI + "&q" + location;
+		var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + nytAPI + "&q=" + location;
 
 		return axios.get(queryURL)
 			.then(function(response){
-				var returnArr = [];
-				var length = response.data.response.docs.length;
-				console.log(length);
-				for(var i = 0; i < length; i++){
-					returnArr.push(response.data.response.docs[i].headline.main);
-					console.log(returnArr);
-				}
-				return returnArr;
+				// var returnArr = [];
+				// var length = response.data.response.docs.length;
+				// console.log(length);
+				// for(var i = 0; i < length; i++){
+					return response.data.response.docs[0].headline.main;
+					// console.log(returnArr);
+				// }
+				// return returnArr;
 		})
 
 	},
