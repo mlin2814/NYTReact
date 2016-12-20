@@ -7,38 +7,52 @@ var nytAPI = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
 // Helper Functions (in this case the only one is runQuery)
 var helpers = {
 
-  runQuery: function(term){
+	// This function serves our purpose of running the query to geolocate. 
+	runQuery: function(location){
 
-    console.log(term);
+		console.log(location);
 
-    // Figure out the geolocation
-    const queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + nytAPI + "&q" + term;
+		//Figure out the geolocation
+		var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + nytAPI + "&q" + location;
 
-    return axios.get(queryURL).then(function(response) {
+		return axios.get(queryURL)
+			.then(function(response){
+				var returnArr = [];
+				var length = response.data.response.docs.length;
+				console.log(length);
+				for(var i = 0; i < length; i++){
+					returnArr.push(response.data.response.docs[i].headline.main);
+					console.log(returnArr);
+				}
+				return returnArr;
+		})
 
-      console.log(response);
-      return response.data.results[0].formatted;
-    });
+	},
 
-  },
+	// This function hits our own server to retrieve the record of query results
+	getHistory: function(){
 
-  getHistory: function(){
 		return axios.get('/api')
 			.then(function(response){
+
 				console.log(response);
 				return response;
 			});
 	},
 
 	// This function posts new searches to our database.
-	postHistory: function(term){
-		return axios.post('/api', {title: term})
+	postHistory: function(location){
+
+		return axios.post('/api', {location: location})
 			.then(function(results){
+
 				console.log("Posted to MongoDB");
 				return(results);
 			})
 	}
-};
 
-// We export the helpers function (which contains getGithubInfo)
+}
+
+
+// We export the helpers function 
 module.exports = helpers;

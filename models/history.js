@@ -2,14 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var HistorySchema = new Schema({
-  title: {
+  location: {
     type: String,
   },
   date: {
   	type: Date
-  },
-  url: {
-    type: String,
   }
 });
 

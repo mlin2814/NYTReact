@@ -2,9 +2,9 @@
 var React = require('react');
 
 // Here we include all of the sub-components
-var Form = require('./Children/Form');
-var Results = require('./Children/Results');
-var History = require('./Children/History');
+var Form = require('./children/Form');
+var Results = require('./children/Results');
+var History = require('./children/History');
 
 // Helper Function
 var helpers = require('./utils/helpers.js');
@@ -28,6 +28,7 @@ var Main = React.createClass({
     })
   },
 
+  // If the component changes (i.e. if a search is entered)... 
   componentDidUpdate: function(prevProps, prevState){
 
     if(prevState.searchTerm != this.state.searchTerm){
@@ -38,7 +39,7 @@ var Main = React.createClass({
         .then(function(data){
           if (data != this.state.results)
           {
-            console.log("Articles", data);
+            console.log("Address", data);
 
             this.setState({
               results: data
@@ -69,7 +70,8 @@ var Main = React.createClass({
       }
   },
 
-componentDidMount: function(){
+  // The moment the page renders get the History
+  componentDidMount: function(){
 
     // Get the latest history.
     helpers.getHistory()
@@ -82,31 +84,46 @@ componentDidMount: function(){
           })
         }
       }.bind(this))
-  }, 
+  },
 
+  // Here we render the function
   render: function(){
 
     return(
+
       <div className="container">
+
         <div className="row">
+
           <div className="jumbotron">
-            <h2 className="text-center">Article Finder!</h2>
-            <p className="text-center"><em>Enter a term to search for articles (ex: "Eiffel Tower").</em></p>
+            <h2 className="text-center">Address Finder!</h2>
+            <p className="text-center"><em>Enter a landmark to search for its exact address (ex: "Eiffel Tower").</em></p>
           </div>
+
           <div className="col-md-6">
+          
             <Form setTerm={this.setTerm}/>
+
           </div>
+
           <div className="col-md-6">
-            <Results articles={this.state.results} />
+        
+            <Results address={this.state.results} />
+
           </div>
+
         </div>
+
         <div className="row">
+
           <History history={this.state.history}/> 
+
         </div>
+
       </div>
     )
   }
 });
 
-// Export the componen back for use in other files
+// Export the component back for use in other files
 module.exports = Main;

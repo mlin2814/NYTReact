@@ -1,3 +1,4 @@
+// Include React 
 var React = require('react');
 
 // This is the results component
@@ -6,21 +7,24 @@ var Results = React.createClass({
   // Here we render the function
   // React created
   render: function(){
-    return (
+
+    return(
+
       <div className="panel panel-default">
         <div className="panel-heading">
           <h3 className="panel-title text-center">Results</h3>
         </div>
         <div className="panel-body text-center">
 
-          <h1>Results:</h1>
-          <p>{this.props.articles}</p>
+            <h1>Results:</h1>
+            <p>{this.props.address}</p>
 
         </div>
       </div>
-    );
+
+    )
   }
-}
+});
 
 // Export the component back for use in other files
 module.exports = Results;
