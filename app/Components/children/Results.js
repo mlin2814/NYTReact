@@ -1,12 +1,11 @@
-import React from "react";
+var React = require('react');
 
-class Results extends React.Component {
+// This is the results component
+var Results = React.createClass({
 
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
+  // Here we render the function
+  // React created
+  render: function(){
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
@@ -24,4 +23,4 @@ class Results extends React.Component {
 }
 
 // Export the component back for use in other files
-export default Results;
+module.exports = Results;

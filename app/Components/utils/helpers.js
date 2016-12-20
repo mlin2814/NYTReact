@@ -1,20 +1,20 @@
 // Include the axios package for performing HTTP requests (promise based alternative to request)
-import axios from "axios";
+var axios = require('axios');
 
 // Geocoder API
-const nytAPI = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
+var nytAPI = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
 
 // Helper Functions (in this case the only one is runQuery)
-const helpers = {
+var helpers = {
 
-  runQuery: (location) => {
+  runQuery: function(term){
 
-    console.log(location);
+    console.log(term);
 
     // Figure out the geolocation
     const queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + nytAPI + "&q" + term;
 
-    return axios.get(queryURL).then((response) => {
+    return axios.get(queryURL).then(function(response) {
 
       console.log(response);
       return response.data.results[0].formatted;
@@ -41,4 +41,4 @@ const helpers = {
 };
 
 // We export the helpers function (which contains getGithubInfo)
-export default helpers;
+module.exports = helpers;

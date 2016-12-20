@@ -1,12 +1,14 @@
-import React from "react";
+// Include React 
+var React = require('react');
 
-// Import sub-components
-import Form from "./children/Form";
-import Results from "./children/Results";
-import History from "./children/History";
+// Here we include all of the sub-components
+var Form = require('./Children/Form');
+var Results = require('./Children/Results');
+var History = require('./Children/History');
 
 // Helper Function
-import helpers from "./utils/helpers";
+var helpers = require('./utils/helpers.js');
+
 
 var Main = React.createClass({
 
@@ -36,7 +38,7 @@ var Main = React.createClass({
         .then(function(data){
           if (data != this.state.results)
           {
-            console.log("Address", data);
+            console.log("Articles", data);
 
             this.setState({
               results: data
@@ -67,11 +69,20 @@ var Main = React.createClass({
       }
   },
 
-  setTerm(term) {
-    this.setState({
-      searchTerm: term
-    });
-  }
+componentDidMount: function(){
+
+    // Get the latest history.
+    helpers.getHistory()
+      .then(function(response){
+        if (response != this.state.history){
+          console.log ("History", response.data);
+
+          this.setState({
+            history: response.data
+          })
+        }
+      }.bind(this))
+  }, 
 
   render: function(){
 
