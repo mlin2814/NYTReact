@@ -24,7 +24,7 @@
     "babel-preset-react": "^6.16.0",
     "json-loader": "^0.5.4",
     "mongod": "^1.3.0",
-    "mongoose": "6.4.6",
+    "mongoose": "6.11.3",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "request": "^2.79.0",
